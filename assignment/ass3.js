@@ -38,6 +38,45 @@ class Child extends React.Component{
     }
 }
 
+/*  2 */
+
+class Bike extends React.Component{
+    state = {
+        text : "",
+    };
+    render(){
+        return(
+            <div> 
+                <h1> Bike</h1>
+                <h2> Bike models  {this.state.text} </h2>
+
+                <BChild getDataFromChild= {this.getDataFromChild.bind(this)} />
+            </div>
+        )
+    }
+
+    //choclocate to get data
+    getDataFromChild(childData){
+        console.log("data in parent:" , childData);
+        this.setState({
+            text: childData,
+        });
+    }
+}
+
+class BChild extends React.Component{
+    render(){
+        console.log("props in child", this.props);
+        let data = "Some of the models";
+        return(
+            <div> 
+                <h2>Bajaj CT 100</h2>
+                <h2>Hero HF Deluxe</h2>
+                <button onClick = {()=>{this.props.getDataFromChild(data)}}>Send data to parent </button>
+            </div>
+        );
+    }
+}
 
 
 
@@ -98,4 +137,4 @@ class Admin extends React.Component {
   }
 
   
-ReactDOM.render(<div><Car /><Admin /></div>,document.getElementById("container"));
+ReactDOM.render(<div><Car /><Admin /> <Bike /></div>,document.getElementById("container"));
